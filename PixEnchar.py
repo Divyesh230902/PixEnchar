@@ -43,7 +43,6 @@ class PixEnchar:
 
     def change_dpi(self):
         for image in self.out_ls:
-    
             if image == 'result':
                 self.out_ls.remove(image)
                 continue
@@ -63,11 +62,12 @@ class PixEnchar:
 if __name__ == '__main__':
     input_path = input('Please input the path of the image folder: ')
     output_path = input('Please input the path of the output folder: ')
+    pe = PixEnchar()
     if input_path == '' or output_path == '':
-        pe = PixEnchar()
-        pe.pixenchar()
-        pe.change_dpi()
+        for i in range(2):
+            pe.pixenchar()
+            pe.change_dpi()
     else:
-        pe = PixEnchar(input_path, output_path)
-        pe.pixenchar()
-        pe.change_dpi()
+        for i in range(2):
+            pe.pixenchar()
+            pe.change_dpi()
