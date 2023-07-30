@@ -37,6 +37,7 @@ class PixEnchar:
             if os.name == 'nt':
                 os.system(f'realesrgan-ncnn-vulkan.exe -i {self.img_path}{img} -o {self.out_path}{img} -n realesrgan-x4plus -s 4 -f png')
             elif os.name == 'posix':
+                os.system('chmod u+x realesrgan-ncnn-vulkan')
                 os.system(f'./realesrgan-ncnn-vulkan -i {self.img_path}{img} -o {self.out_path}{img} -n realesrgan-x4plus -s 4 -f png')
             print('Done!\nYou can check the result in', self.out_path+img+'.')
 
