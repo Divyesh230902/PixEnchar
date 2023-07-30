@@ -43,7 +43,7 @@ class PixEnchar:
 
     def change_dpi(self):
         for image in self.out_ls:
-            if image == 'result':
+            if image == 'result' or image == '.ipynb_checkpoints' or image == '.DS_Store':
                 self.out_ls.remove(image)
                 continue
             image = Image.open(f'{self.out_path}{image}')
