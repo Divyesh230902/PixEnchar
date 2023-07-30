@@ -64,9 +64,11 @@ if __name__ == '__main__':
     output_path = input('Please input the path of the output folder: ')
     if input_path == '' or output_path == '':
         pe = PixEnchar()
-        pe.pixenchar()
-        pe.change_dpi()
+        for i in range(2):
+            pe.pixenchar()
+            pe.change_dpi()
     else:
         pe = PixEnchar(input_path, output_path)
-        pe.pixenchar()
-        pe.change_dpi()
+        for i in range(2):
+            pe.pixenchar()
+            pe.change_dpi()
