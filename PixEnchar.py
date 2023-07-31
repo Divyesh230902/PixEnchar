@@ -46,6 +46,7 @@ class PixEnchar:
                 self.img_ls[i] = self.img_ls[i].replace(' ', '_')
 
     def pixenchar(self):
+        PixEnchar.process_path(self)
         PixEnchar.read_imgs(self)
         PixEnchar.remove_processed(self)
         PixEnchar.process(self)
