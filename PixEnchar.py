@@ -5,7 +5,6 @@ class PixEnchar:
     def __init__(self, input_path=f'{os.getcwd()}/input', output_path=f'{os.getcwd()}/output'):
         self.img_path = input_path+'/'
         self.out_path = output_path+'/'
-        # remove space from the path
         self.img_path = self.img_path.replace(' ', '_')
         self.out_path = self.out_path.replace(' ', '_')
         Image.MAX_IMAGE_PIXELS = None
