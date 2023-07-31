@@ -5,8 +5,6 @@ class PixEnchar:
     def __init__(self, input_path=f'{os.getcwd()}/input', output_path=f'{os.getcwd()}/output'):
         self.img_path = input_path+'/'
         self.out_path = output_path+'/'
-        self.img_path = self.img_path.replace(' ', '_')
-        self.out_path = self.out_path.replace(' ', '_')
         Image.MAX_IMAGE_PIXELS = None
         self.result = self.out_path + 'result/'
         self.DPI = (900,900)
@@ -14,6 +12,23 @@ class PixEnchar:
         print('Output path:', self.out_path)
         if not os.path.exists(self.result):
             os.makedirs(self.result)
+
+    def process_path(self):
+        img_path_split = self.img_path.split('/')
+        out_path_split = self.out_path.split('/')
+        for i in range(len(img_path_split)):
+            if ' ' in img_path_split[i]:
+                os.rename(img_path_split[i], img_path_split[i].replace(' ', '_'))
+                img_path_split[i] = img_path_split[i].replace(' ', '_')
+                self.img_path = '/'.join(img_path_split)
+                print(self.img_path)
+        for i in range(len(out_path_split)):
+            if ' ' in out_path_split[i]:
+                os.rename(out_path_split[i], out_path_split[i].replace(' ', '_'))
+                out_path_split[i] = out_path_split[i].replace(' ', '_')
+                self.out_path = '/'.join(out_path_split)
+                print(self.out_path) 
+
         
     def read_imgs(self):
         self.img_ls = os.listdir(self.img_path)
