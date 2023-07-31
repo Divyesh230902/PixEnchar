@@ -12,6 +12,22 @@ class PixEnchar:
         print('Output path:', self.out_path)
         if not os.path.exists(self.result):
             os.makedirs(self.result)
+
+    def process_path(self):
+        img_path_split = self.img_path.split('/')
+        out_path_split = self.out_path.split('/')
+        for i in range(len(img_path_split)):
+            if ' ' in img_path_split[i]:
+                os.rename(img_path_split[i], img_path_split[i].replace(' ', '_'))
+                img_path_split[i] = img_path_split[i].replace(' ', '_')
+                self.img_path = '/'.join(img_path_split)
+                print(self.img_path)
+        for i in range(len(out_path_split)):
+            if ' ' in out_path_split[i]:
+                os.rename(out_path_split[i], out_path_split[i].replace(' ', '_'))
+                out_path_split[i] = out_path_split[i].replace(' ', '_')
+                self.out_path = '/'.join(out_path_split)
+                print(self.out_path) 
         
     def read_imgs(self):
         self.img_ls = os.listdir(self.img_path)
@@ -29,6 +45,7 @@ class PixEnchar:
                 self.img_ls[i] = self.img_ls[i].replace(' ', '_')
 
     def pixenchar(self):
+        PixEnchar.process_path(self)
         PixEnchar.read_imgs(self)
         PixEnchar.remove_processed(self)
         PixEnchar.process(self)
