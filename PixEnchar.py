@@ -1,13 +1,14 @@
 import os
 from PIL import Image
 
+
 class PixEnchar:
     def __init__(self, input_path=f'{os.getcwd()}/input', output_path=f'{os.getcwd()}/output'):
         self.img_path = input_path+'/'
         self.out_path = output_path+'/'
         Image.MAX_IMAGE_PIXELS = None
         self.result = self.out_path + 'result/'
-        self.DPI = (900,900)
+        self.DPI = (900, 900)
         print('Input path:', self.img_path)
         print('Output path:', self.out_path)
         if not os.path.exists(self.result):
@@ -18,18 +19,19 @@ class PixEnchar:
         out_path_split = self.out_path.split('/')
         for i in range(len(img_path_split)):
             if ' ' in img_path_split[i]:
-                os.rename(img_path_split[i], img_path_split[i].replace(' ', '_'))
+                os.rename(img_path_split[i],
+                          img_path_split[i].replace(' ', '_'))
                 img_path_split[i] = img_path_split[i].replace(' ', '_')
                 self.img_path = '/'.join(img_path_split)
                 print(self.img_path)
         for i in range(len(out_path_split)):
             if ' ' in out_path_split[i]:
-                os.rename(out_path_split[i], out_path_split[i].replace(' ', '_'))
+                os.rename(out_path_split[i],
+                          out_path_split[i].replace(' ', '_'))
                 out_path_split[i] = out_path_split[i].replace(' ', '_')
                 self.out_path = '/'.join(out_path_split)
-                print(self.out_path) 
+                print(self.out_path)
 
-        
     def read_imgs(self):
         self.img_ls = os.listdir(self.img_path)
         self.out_ls = os.listdir(self.out_path)
@@ -42,7 +44,8 @@ class PixEnchar:
     def process(self):
         for i in range(len(self.img_ls)):
             if ' ' in self.img_ls[i]:
-                os.rename(self.img_path + self.img_ls[i], self.img_path + self.img_ls[i].replace(' ', '_'))
+                os.rename(
+                    self.img_path + self.img_ls[i], self.img_path + self.img_ls[i].replace(' ', '_'))
                 self.img_ls[i] = self.img_ls[i].replace(' ', '_')
 
     def pixenchar(self):
@@ -53,10 +56,12 @@ class PixEnchar:
         for img in self.img_ls:
             print('Processing', img+'...')
             if os.name == 'nt':
-                os.system(f'realesrgan-ncnn-vulkan.exe -i {self.img_path}{img} -o {self.out_path}{img} -n realesrgan-x4plus -s 4 -f png')
+                os.system(
+                    f'realesrgan-ncnn-vulkan.exe -i {self.img_path}{img} -o {self.out_path}{img} -n realesrgan-x4plus -s 4 -f png')
             elif os.name == 'posix':
                 os.system('chmod u+x realesrgan-ncnn-vulkan')
-                os.system(f'./realesrgan-ncnn-vulkan -i {self.img_path}{img} -o {self.out_path}{img} -n realesrgan-x4plus -s 4 -f png')
+                os.system(
+                    f'./realesrgan-ncnn-vulkan -i {self.img_path}{img} -o {self.out_path}{img} -n realesrgan-x4plus -s 4 -f png')
             print('Done!\nYou can check the result in', self.out_path+img+'.')
 
     def change_dpi(self):
