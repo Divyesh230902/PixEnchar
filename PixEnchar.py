@@ -71,4 +71,3 @@ class PixEnchar:
 #         pe = PixEnchar(input_path, output_path)
 #         pe.pixenchar()
 #         pe.change_dpi()
-# .
