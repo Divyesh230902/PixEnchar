@@ -1,4 +1,5 @@
 import os
+import matplotlib.pyplot as plt
 from PIL import Image
 
 class PixEnchar:
@@ -12,22 +13,6 @@ class PixEnchar:
         print('Output path:', self.out_path)
         if not os.path.exists(self.result):
             os.makedirs(self.result)
-
-    def process_path(self):
-        img_path_split = self.img_path.split('/')
-        out_path_split = self.out_path.split('/')
-        for i in range(len(img_path_split)):
-            if ' ' in img_path_split[i]:
-                os.rename(img_path_split[i], img_path_split[i].replace(' ', '_'))
-                img_path_split[i] = img_path_split[i].replace(' ', '_')
-                self.img_path = '/'.join(img_path_split)
-                print(self.img_path)
-        for i in range(len(out_path_split)):
-            if ' ' in out_path_split[i]:
-                os.rename(out_path_split[i], out_path_split[i].replace(' ', '_'))
-                out_path_split[i] = out_path_split[i].replace(' ', '_')
-                self.out_path = '/'.join(out_path_split)
-                print(self.out_path) 
         
     def read_imgs(self):
         self.img_ls = os.listdir(self.img_path)
@@ -45,7 +30,6 @@ class PixEnchar:
                 self.img_ls[i] = self.img_ls[i].replace(' ', '_')
 
     def pixenchar(self):
-        PixEnchar.process_path(self)
         PixEnchar.read_imgs(self)
         PixEnchar.remove_processed(self)
         PixEnchar.process(self)
@@ -76,16 +60,14 @@ class PixEnchar:
                 print(f'Image {img_name} saved to {out_img}')
 
 
-if __name__ == '__main__':
-    input_path = input('Please input the path of the image folder: ')
-    output_path = input('Please input the path of the output folder: ')
-    if input_path == '' or output_path == '':
-        pe = PixEnchar()
-        for i in range(2):
-            pe.pixenchar()
-            pe.change_dpi()
-    else:
-        pe = PixEnchar(input_path, output_path)
-        for i in range(2):
-            pe.pixenchar()
-            pe.change_dpi()
+# if __name__ == '__main__':
+#     input_path = input('Please input the path of the image folder: ')
+#     output_path = input('Please input the path of the output folder: ')
+#     if input_path == '' or output_path == '':
+#         pe = PixEnchar()
+#         pe.pixenchar()
+#         pe.change_dpi()
+#     else:
+#         pe = PixEnchar(input_path, output_path)
+#         pe.pixenchar()
+#         pe.change_dpi()
